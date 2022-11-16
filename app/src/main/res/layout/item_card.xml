@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="6dp"
-    android:elevation="6dp">
+    android:elevation="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             android:layout_toRightOf="@+id/iv_foto"
-            android:layout_marginLeft="6dp"/>
+            android:layout_marginLeft="8dp"/>
 
         <TextView
             android:id="@+id/tv_tentang"
@@ -34,11 +34,9 @@
             android:justificationMode="inter_word"
             android:layout_below="@+id/tv_nama"
             android:layout_toRightOf="@+id/iv_foto"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="8dp"
             android:maxLines="3"
             android:ellipsize="end"/>
-
-
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
