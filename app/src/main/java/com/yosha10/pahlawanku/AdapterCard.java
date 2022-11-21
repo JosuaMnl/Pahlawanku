@@ -1,5 +1,7 @@
 package com.yosha10.pahlawanku;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,11 @@ import java.util.ArrayList;
 
 public class AdapterCard extends RecyclerView.Adapter<AdapterCard.ClassViewHolder>{ // VH di dalam <> RecyclerView, adalah class view holder
     private ArrayList<ModelPahlawan> dataPahlawan; // Variabel Array List dari Model Pahlawan
+    private Context ctx; // Membuat Variabel Context (holder.itemView.getContext())
 
-    public AdapterCard(ArrayList<ModelPahlawan> dataPahlawan) { //Constructor
+    public AdapterCard(ArrayList<ModelPahlawan> dataPahlawan, Context ctx) { // Constructor
         this.dataPahlawan = dataPahlawan;
+        this.ctx = ctx;
     }
 
     @NonNull
@@ -33,10 +37,26 @@ public class AdapterCard extends RecyclerView.Adapter<AdapterCard.ClassViewHolde
         holder.tvNama.setText(pahlawan.getNama());
         holder.tvTentang.setText(pahlawan.getTentang());
         Glide
-                .with(holder.itemView.getContext())
+                .with(ctx)
                 .load(pahlawan.getFoto())
                 .centerCrop()
                 .into(holder.ivFoto);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String xNama, xTentang, xFoto;
+                xNama = pahlawan.getNama();
+                xTentang = pahlawan.getTentang();
+                xFoto = pahlawan.getFoto();
+
+                // Menggunakan get context karena bukan class activity (non-activity)
+                Intent intentKirim = new Intent(ctx, DetailActivity.class);
+                intentKirim.putExtra("xNama", xNama);
+                intentKirim.putExtra("xTentang", xTentang);
+                intentKirim.putExtra("xFoto", xFoto);
+                ctx.startActivity(intentKirim);
+            }
+        });
     }
 
     @Override
